@@ -3,43 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Import and Append</title>
-    <link rel="stylesheet" href="style_reg.css">
+    <title>Tournament Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            background-color: #fafafa;
+            color: #2d2d2d;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 60px 40px;
+        }
+        h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 48px;
+            color: #1a1a1a;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #1a1a1a, #404040);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            margin: 16px;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 12px;
+            background-color: #2d2d2d;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 250px;
+        }
+        button:hover {
+            background-color: #404040;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        input, select {
+            width: 300px;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+        label {
+            font-weight: 500;
+            display: block;
+            margin-top: 16px;
+        }
+        #weightCategory {
+            font-size: 18px;
+            font-weight: 500;
+            color: #404040;
+            margin-top: 8px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Data Import and Append</h1>
+    <div class="container">
+        <h1>Tournament Registration</h1>
 
-    <!-- Input for Google Sheets link -->
-    <label for="sheetLink">Paste Google Sheets Link:</label>
-    <input type="text" id="sheetLink" placeholder="Enter Google Sheets URL here"><br><br>
+        <!-- Input for Google Sheets link -->
+        <label for="sheetLink">Paste Google Sheets Link:</label>
+        <input type="text" id="sheetLink" placeholder="Enter Google Sheets URL here">
 
-    <!-- Manual Entry Form -->
-    <form id="dataForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
+        <!-- Manual Entry Form -->
+        <form id="dataForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age"><br><br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age">
 
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" onchange="showWeightCategory()">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select><br><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" onchange="showWeightCategory()">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
 
-        <label for="weight">Weight:</label>
-        <input type="number" id="weight" name="weight" step="0.1" oninput="showWeightCategory()"><br><br>
-        <div id="weightCategory"></div><br>
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" step="0.1" oninput="showWeightCategory()">
+            <div id="weightCategory"></div>
 
-        <label for="clubName">Club Name:</label>
-        <input type="text" id="clubName" name="clubName"><br><br>
+            <label for="clubName">Club Name:</label>
+            <input type="text" id="clubName" name="clubName">
 
-        <button type="button" onclick="appendData()">Append to Target Google Sheet</button>
-    </form>
+            <button type="button" onclick="appendData()">Submit Registration</button>
+        </form>
 
-    <!-- Import button -->
-    <button onclick="importData()">Import Data from Provided Link</button>
+        <!-- Import button -->
+        <button onclick="importData()">Import Data from Sheet</button>
+    </div>
 
     <script>
         async function importData() {
